@@ -5,34 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <script>
-    const globalId = 1;
+
+    let globalId = 1;
+
+    function markAsDone(todoId){
+        const parent = document.getElementById(todoId);
+        parent.children[2].innerHTML = "Done";
+    }
+
     function addToDo(){
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value; 
-        createChild(title, description)
+        const grandparent = document.getElementById("container");
+        grandparent.appendChild(createChild(title, description, ++globalId));
     }
-    function markAsDone(todoId){
-        const parent = document.getElementById("todoId");
-        parent.children[2].innerHTML = "Done";
-    }
-    function createChild(title, description){
+
+    function createChild(title, description,id){
         const parent = document.createElement("div");
         const child = document.createElement("div");
         child.innerHTML = `TITLE: ${title}`;
         const child2 = document.createElement("div");
         child2.innerHTML = `DESCRIPTION: ${description}`;
         const child3 = document.createElement("button");
+        child3.setAttribute("onclick", `markAsDone(${id})`);
         child3.innerHTML = `Mark as Done`;
         parent.appendChild(child);
-        parent("container").appendChild(child2);
-        parent("container").appendChild(child2);
+        parent.appendChild(child2);
+        parent.appendChild(child3);
+        parent.setAttribute("id", id);
+        return parent;
     }
+
 </script>
+
 <body>
     <div>
         <input type = "text" placeholder = "Title" id = "title"></input><br></br>
         <input type = "text" placeholder = "Description" id = "description"></input><br></br>
         <button onclick="addToDo()"> Add To-Do </button>
+        <div id = "container">
+
+        </div>
 </body>
 </html>
