@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<body>
+    <div>
+        <input type = "text" placeholder = "Title" id = "title"></input><br></br>
+        <input type = "text" placeholder = "Description" id = "description"></input><br></br>
+        <button onclick="addToDo()"> Add To-Do </button>
+        <div id = "container">
 
+        </div>
+</body>
 <script>
 
     let globalId = 1;
@@ -22,31 +30,21 @@
         grandparent.appendChild(createChild(title, description, ++globalId));
     }
 
-    function createChild(title, description,id){
-        const parent = document.createElement("div");
-        const child = document.createElement("div");
-        child.innerHTML = `TITLE: ${title}`;
-        const child2 = document.createElement("div");
-        child2.innerHTML = `DESCRIPTION: ${description}`;
-        const child3 = document.createElement("button");
-        child3.setAttribute("onclick", `markAsDone(${id})`);
-        child3.innerHTML = `Mark as Done`;
-        parent.appendChild(child);
-        parent.appendChild(child2);
-        parent.appendChild(child3);
-        parent.setAttribute("id", id);
-        return parent;
-    }
+    function createChild(title, description, id){
+    const parent = document.createElement("div");
+    const child = document.createElement("div");
+    child.innerHTML = `TITLE: ${title}`;
+    const child2 = document.createElement("div");
+    child2.innerHTML = `DESCRIPTION: ${description}`;
+    const child3 = document.createElement("button");
+    child3.setAttribute("onclick", `markAsDone(${id})`);
+    child3.innerHTML = `Mark as Done`;
+    parent.appendChild(child);
+    parent.appendChild(child2);
+    parent.appendChild(child3);
+    parent.setAttribute("id", id);
+    return parent;
+}
 
 </script>
-
-<body>
-    <div>
-        <input type = "text" placeholder = "Title" id = "title"></input><br></br>
-        <input type = "text" placeholder = "Description" id = "description"></input><br></br>
-        <button onclick="addToDo()"> Add To-Do </button>
-        <div id = "container">
-
-        </div>
-</body>
 </html>
