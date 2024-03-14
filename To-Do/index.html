@@ -9,15 +9,18 @@
 <body>
     <div class="container">
         <h2>faq</h2>
-        <label for="name">Question1</label>
-        <input type = "text" placeholder = "Question1" id = "title"></input><br></br>
-        <label for="name">Answer1</label>
-        <input type = "text" placeholder = "Answer1" id = "description"></input><br></br>
+        <label for="title">Question</label>
+        <input type = "text" placeholder = "Question" id = "title"></input><br></br>
+        <label for="description">Answer</label>
+        <input type = "text" placeholder = "Answer" id = "description"></input><br></br>
         <button onclick="addToDo()"> Enter </button>
-        <div id = "container">
+        <br></br>
+        <div id = "dyCont">
 
         </div>
+        <br>
         <button onclick = "submit()"> Submit </button>
+    </div>
 </body>
 <script>
 
@@ -26,29 +29,30 @@
     function addToDo(){
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value; 
-        const grandparent = document.getElementById("container");
+        const grandparent = document.getElementById("dyCont");
         grandparent.appendChild(createChild(title, description, ++globalId));
     }
 
     function createChild(title, description, id){
         const parent = document.createElement("div");
         const child = document.createElement("div");
-        child.innerHTML = `TITLE: ${title}`;
+        child.innerHTML = `QUESTION: ${title}`;
         const child2 = document.createElement("div");
-        child2.innerHTML = `DESCRIPTION: ${description}`;
+        child2.innerHTML = `AMSWER: ${description}`;
+        const child3 = document.createElement("br");
         parent.appendChild(child);
         parent.appendChild(child2);
+        parent.appendChild(child3);
         return parent;
     }
 
     function submit() {
-        const container = document.getElementById("container");
+        const container = document.getElementById("dyCont");
         let text = '';
         for (let i = 0; i < container.children.length; i++) {
             const child = container.children[i];
             text += `Question: ${child.children[0].innerText.split(': ')[1]}\n`;
             text += `Answer: ${child.children[1].innerText.split(': ')[1]}\n`;
-            text += `Status: ${child.children[2].innerText}\n\n`;
         }
         const blob = new Blob([text], {type: "text/plain;charset=utf-8"});
         const url = URL.createObjectURL(blob);
